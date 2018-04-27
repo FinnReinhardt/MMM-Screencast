@@ -7,9 +7,11 @@ ipc.config.socketRoot = 'tmp';
 ipc.config.networkHost = 'localhost';
 ipc.config.appSpace = 'MMM-Screencast';
 const url = process.argv[2];
-const position = process.argv[3]
-const width = parseInt(process.argv[4], 10)
-const height = parseInt(process.argv[5], 10)
+const width = parseInt(process.argv[3], 10);
+const height = parseInt(process.argv[4], 10);
+const position = process.argv[5];
+const y = parseInt(process.argv[6], 10);
+const x = parseInt(position, 10);
 
 ipc.serve(`/${ipc.config.socketRoot}/${ipc.config.appSpace}.${ipc.config.id}`, () => {
   ipc.server.on('quit', (data, socket) => {
@@ -34,13 +36,15 @@ app.once('ready', function () {
     zoomFactor: 1.0,
     focusable: false
   };
-
+    
   const screenCastWindow = new electron.BrowserWindow(windowOptions);
-
-  const positioner = new Positioner(screenCastWindow)
-  positioner.move(position)
-
-  screenCastWindow.loadURL(url)
+  const positioner = new Positioner(screenCastWindow);
+    
+  if (!x) {
+    positioner.move(position);
+  } else {
+    screenCastWindow.setPosition(x, y);
+  }
 
   // Show window when page is ready
   screenCastWindow.once('ready-to-show', function () {

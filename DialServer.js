@@ -22,21 +22,29 @@ var apps = {
 		state: "stopped",
 		allowStop: true,
 		pid: null,
-	    launch: function (launchData, config) {
-	        var url = "http://www.youtube.com/tv?"+launchData;
-	        child = spawn('npm', ['start', url, config.position, config.width, config.height], {
-  				cwd: 'modules/MMM-Screencast'
-			})
+    launch: function (launchData, config) {
+      var url = "http://www.youtube.com/tv?"+launchData;
+      let args = [];
+      if (config.position === 'string') {
+      	args = ['start', url, config.width, config.height, config.position];
+      } else {
+      	args = ['start', url, config.width, config.height, config.position.x, config.position.y];
+      }
+
+	    child = spawn('npm', args, { cwd: 'modules/MMM-Screencast'});
+			
 			child.stdout.on('data', function(data) {
-			    console.log('screencast stdout: ' + data);
+		    console.log('screencast stdout: ' + data);
 			});
+
 			child.stderr.on('data', function(data) {
-			    console.log('screencast stderr: ' + data);
+			  console.log('screencast stderr: ' + data);
 			});
+
 			child.on('close', function(code) {
-			    console.log('closing code: ' + code);
+			  console.log('closing code: ' + code);
 			});
-    		}
+  	}
 	}
 };
 

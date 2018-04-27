@@ -28,6 +28,6 @@ var config = {
 
 | Option    | Description
 |---------- |-----------
-| `position`| *Required* The position of the screencast window. <br>**Options:** `['bottomRight', 'bottomCenter', 'bottomLeft', 'center',  'topRight', 'topCenter', 'topLeft']` <br>**Type:** `string` <br>**Note:** This module config actual sets the location, not the magic mirror position config.
+| `position`| *Required* The position of the screencast window. <br> **Type:** `object` <br> **EX:** `{ x: 100, y:200 }` <br> **Note:** `x` and `y` params are both needed and expect a number. <br> **OR** <br> **Type:** `string` <br> **Options:** `['bottomRight', 'bottomCenter', 'bottomLeft', 'center',  'topRight', 'topCenter', 'topLeft']`  <br> **Note:** This module config actual sets the location, not the magic mirror position config.
 | `height`  | *Required* Height of the screencast window. <br>**Type:** `number` (pixels)
 | `width`   | *Required* Width of the screencast window. <br>**Type:** `number` (pixels)
