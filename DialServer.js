@@ -25,7 +25,7 @@ var apps = {
     launch: function (launchData, config) {
       var url = "http://www.youtube.com/tv?"+launchData;
       let args = [];
-      if (config.position === 'string') {
+      if (typeof config.position === 'string') {
       	args = ['start', url, config.width, config.height, config.position];
       } else {
       	args = ['start', url, config.width, config.height, config.position.x, config.position.y];

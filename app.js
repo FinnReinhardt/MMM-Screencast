@@ -38,9 +38,10 @@ app.once('ready', function () {
   };
     
   const screenCastWindow = new electron.BrowserWindow(windowOptions);
-  const positioner = new Positioner(screenCastWindow);
     
   if (!x) {
+    console.log('move', x)
+    const positioner = new Positioner(screenCastWindow);
     positioner.move(position);
   } else {
     screenCastWindow.setPosition(x, y);
